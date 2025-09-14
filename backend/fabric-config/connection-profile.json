@@ -1,72 +1,43 @@
 {
-  "name": "ayurveda-network",
+  "name": "test-network-org1",
   "version": "1.0.0",
   "client": {
-    "organization": "CollectorMSP",
+    "organization": "Org1MSP",
     "connection": {
       "timeout": {
         "peer": {
           "endorser": "300"
-        }
+        },
+        "orderer": "300"
       }
     }
   },
   "organizations": {
-    "CollectorMSP": {
-      "mspid": "CollectorMSP",
-      "peers": ["peer0.collector.example.com"],
-      "certificateAuthorities": ["ca.collector.example.com"]
-    },
-    "ProcessorMSP": {
-      "mspid": "ProcessorMSP", 
-      "peers": ["peer0.processor.example.com"],
-      "certificateAuthorities": ["ca.processor.example.com"]
-    },
-    "LabMSP": {
-      "mspid": "LabMSP",
-      "peers": ["peer0.lab.example.com"],
-      "certificateAuthorities": ["ca.lab.example.com"]
+    "Org1MSP": {
+      "mspid": "Org1MSP",
+      "peers": ["peer0.org1.example.com"],
+      "certificateAuthorities": ["ca.org1.example.com"]
     }
   },
   "peers": {
-    "peer0.collector.example.com": {
+    "peer0.org1.example.com": {
       "url": "grpc://localhost:7051",
       "tlsCACerts": {
-        "pem": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
+        "path": "/tmp/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt"
       },
       "grpcOptions": {
-        "ssl-target-name-override": "peer0.collector.example.com"
+        "ssl-target-name-override": "peer0.org1.example.com",
+        "hostnameOverride": "peer0.org1.example.com"
       }
-    },
-    "peer0.processor.example.com": {
-      "url": "grpc://localhost:8051"
-    },
-    "peer0.lab.example.com": {
-      "url": "grpc://localhost:9051"
     }
   },
   "certificateAuthorities": {
-    "ca.collector.example.com": {
+    "ca.org1.example.com": {
       "url": "http://localhost:7054",
-      "caName": "ca-collector"
-    }
-  },
-  "channels": {
-    "mychannel": {
-      "orderers": ["orderer.example.com"],
-      "peers": {
-        "peer0.collector.example.com": {
-          "endorsingPeer": true,
-          "chaincodeQuery": true,
-          "ledgerQuery": true,
-          "eventSource": true
-        }
+      "caName": "ca-org1",
+      "httpOptions": {
+        "verify": false
       }
-    }
-  },
-  "orderers": {
-    "orderer.example.com": {
-      "url": "grpc://localhost:7050"
     }
   }
 }

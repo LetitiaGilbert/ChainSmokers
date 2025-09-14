@@ -20,7 +20,7 @@ export const decryptPhone = (encryptedPhone) => {
   }
 };
 
-// Hash phone number for searching (one-way)
+// Hash phone number
 export const hashPhone = (phoneNumber) => {
   if (!phoneNumber) return null;
   return CryptoJS.SHA256(phoneNumber + ENCRYPTION_KEY).toString();

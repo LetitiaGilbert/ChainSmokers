@@ -3,7 +3,6 @@ import { addLabResult, getLabResults } from "../controllers/labController.js";
 
 const router = express.Router();
 
-// Add a new lab test result
 router.post("/result", addLabResult);
 
 // Get all lab results for a batch

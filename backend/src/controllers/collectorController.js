@@ -8,7 +8,18 @@ const batchSchema = Joi.object({
   farmerName: Joi.string().min(3).required(),
   location: Joi.string().required(),
   herbType: Joi.string().required(),
-  quantity: Joi.number().positive().required()
+  quantity: Joi.number().positive().required(),
+  
+  // GPS coordinates (required for geo-tagging compliance)
+  coordinates: Joi.object({
+    latitude: Joi.number().min(-90).max(90).required(),
+    longitude: Joi.number().min(-180).max(180).required(),
+    altitude: Joi.number().optional(),
+    accuracy: Joi.number().positive().optional()
+  }).required(),
+  
+  // Zone ID for geo-fence validation
+  zoneId: Joi.string().optional()
 });
 
 // Create a new batch
