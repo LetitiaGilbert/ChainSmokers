@@ -1,0 +1,72 @@
+{
+  "name": "ayurveda-network",
+  "version": "1.0.0",
+  "client": {
+    "organization": "CollectorMSP",
+    "connection": {
+      "timeout": {
+        "peer": {
+          "endorser": "300"
+        }
+      }
+    }
+  },
+  "organizations": {
+    "CollectorMSP": {
+      "mspid": "CollectorMSP",
+      "peers": ["peer0.collector.example.com"],
+      "certificateAuthorities": ["ca.collector.example.com"]
+    },
+    "ProcessorMSP": {
+      "mspid": "ProcessorMSP", 
+      "peers": ["peer0.processor.example.com"],
+      "certificateAuthorities": ["ca.processor.example.com"]
+    },
+    "LabMSP": {
+      "mspid": "LabMSP",
+      "peers": ["peer0.lab.example.com"],
+      "certificateAuthorities": ["ca.lab.example.com"]
+    }
+  },
+  "peers": {
+    "peer0.collector.example.com": {
+      "url": "grpc://localhost:7051",
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
+      },
+      "grpcOptions": {
+        "ssl-target-name-override": "peer0.collector.example.com"
+      }
+    },
+    "peer0.processor.example.com": {
+      "url": "grpc://localhost:8051"
+    },
+    "peer0.lab.example.com": {
+      "url": "grpc://localhost:9051"
+    }
+  },
+  "certificateAuthorities": {
+    "ca.collector.example.com": {
+      "url": "http://localhost:7054",
+      "caName": "ca-collector"
+    }
+  },
+  "channels": {
+    "mychannel": {
+      "orderers": ["orderer.example.com"],
+      "peers": {
+        "peer0.collector.example.com": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        }
+      }
+    }
+  },
+  "orderers": {
+    "orderer.example.com": {
+      "url": "grpc://localhost:7050"
+    }
+  }
+}
