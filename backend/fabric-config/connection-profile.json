@@ -1,0 +1,43 @@
+{
+  "name": "test-network-org1",
+  "version": "1.0.0",
+  "client": {
+    "organization": "Org1MSP",
+    "connection": {
+      "timeout": {
+        "peer": {
+          "endorser": "300"
+        },
+        "orderer": "300"
+      }
+    }
+  },
+  "organizations": {
+    "Org1MSP": {
+      "mspid": "Org1MSP",
+      "peers": ["peer0.org1.example.com"],
+      "certificateAuthorities": ["ca.org1.example.com"]
+    }
+  },
+  "peers": {
+    "peer0.org1.example.com": {
+      "url": "grpc://localhost:7051",
+      "tlsCACerts": {
+        "path": "/tmp/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt"
+      },
+      "grpcOptions": {
+        "ssl-target-name-override": "peer0.org1.example.com",
+        "hostnameOverride": "peer0.org1.example.com"
+      }
+    }
+  },
+  "certificateAuthorities": {
+    "ca.org1.example.com": {
+      "url": "http://localhost:7054",
+      "caName": "ca-org1",
+      "httpOptions": {
+        "verify": false
+      }
+    }
+  }
+}
